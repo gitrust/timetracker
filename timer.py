@@ -4,7 +4,7 @@
 
 __author__      = "gitrust"
 __copyright__   = "Copyright 2014"
-__version__     = "0.9.5"
+__version__     = "0.9.6"
 __revision__    = "$Rev: 55 $"
 __status__      = "Dev"
 
@@ -17,10 +17,10 @@ from Control import Control
 class Timer:
     def __init__(self):
         self.control = Control()
-        print("task monitoring V" + __version__)
+        print("time tracker V" + __version__)
 
     def exec_command(self,prompt):
-		# builtin weiche zwischen verschiedenen python versionen
+        # builtin weiche zwischen verschiedenen python versionen
         if 'raw_input' in dir(__builtins__):
             rawcmd =  raw_input(prompt)
         else:
@@ -63,6 +63,8 @@ class Timer:
             status = self.commit(cmdlist)
         elif cmd in ("rename","ren"):
             status = self.rename(cmdlist)
+        elif cmd in ("adjust"):
+            status = self.adjust(cmdlist)
         elif cmd == "":
             status = [0,""]
         else:
@@ -73,8 +75,9 @@ class Timer:
     
     def printhelp(self,cmd):
         print("Available commands: ")
-        print(" #<id>\t\treschedule an existing task using its id")
-        print(" add,a\t\tadd and start a new task")
+        print(" #<id>\t\tactivate an existing task using its id")
+        print(" add,a\t\tadd a new task and activate it")
+        print(" adjust\t\ttrasnfer time of one task to another or adjust time of a task")
         print(" clear,cl\tclear all tasks")
         print(" commit,ci\tcommit a task with specific id")
         print(" done\t\tset task to done")
@@ -158,6 +161,27 @@ class Timer:
     def push(self,cmdlist):
         filename = os.getenv("USERPROFILE") + "/timer.db"
         self.control.push(filename)
+        return [0]
+
+    def adjust(self,cmdlist):
+
+        try:
+            arglen = len(cmdlist)
+            # move time from one task to another
+            if arglen > 3:
+                id_from = cmdlist[1]
+                id_to = cmdlist[2]
+                time_in_min = abs(int(cmdlist[3]))
+                self.control.adjust(id_from,time_in_min)
+                self.control.adjust(id_from,time_in_min*-1)
+            # adjust time for one task
+			else:
+                id = cmdlist[1]
+                time_in_min = cmdlist[2]
+                self.control.adjust(id,time_in_min)
+        except Exception as e:
+            print (str(e))
+            return [1,"Usage: adjust <id_from> [id_to] [-]<time_in_min>"]
         return [0]
         
     def pause(self, cmd):

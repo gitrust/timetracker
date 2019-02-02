@@ -25,6 +25,7 @@ class Task:
         self.id = id
         self.name = name
         self.start = start
+        self.updated = start
         # in seconds
         self.duration = 0
         self.type = type
@@ -34,14 +35,19 @@ class Task:
     def touch(self):
         """Rest last access time for this task """
         self.start = Util.now_sec()
+        self.updated = self.start
      
     def update_duration(self,now):
         """Update task duration using current timestamp """
-        self.duration = self.duration + (now - self.start)
+        self.duration =  self.duration + (now - self.start)
+        # reset to new start
+        self.start = now
+        self.updated = now
         
     def done(self):
         """Set status of this task to STATUS_DONE """
         self.status = Task.STATUS_DONE
+        self.updated = Util.now_sec()
     
     def type_to_str(self):
         if self.type == Task.TYPE_NORMAL:
@@ -56,14 +62,22 @@ class Task:
         elif self.status == Task.STATUS_ACTIVE:
             return "ACTIVE"
         return "UNKNOWN"
+
+    def reset_start(self):
+        self.start = Util.now_sec()
+        
+    def adjust_starttime(self,timeinmin):
+        self.duration = self.duration + (int(timeinmin) * 60)
+        self.updated = Util.now_sec()
         
     def exp(self):
         """Export task fields as json string"""
         str =  "id:{}, duration:{}, start:\"{}\", name:\"{}\", type:{}, status:{},created:\"{}\""
         return "{" + str.format(self.id,self.duration,self.start,self.name,self.type,self.status,self.created) + "}"
-        
+     
+
     def __str__(self):
-        return "{id:" + str(self.id).rjust(3) + ", dur:" + Util.format_duration(self.duration) + ", start:" + Util.format_minutes(self.start) +  ", name:'" + self.name + "'}"
+        return "{id:" + str(self.id).rjust(3) + ", dur:" + Util.format_duration(self.duration) + ", upd:" + Util.format_minutes(self.updated) +  ", name:'" + self.name + "'}"
 
     
     

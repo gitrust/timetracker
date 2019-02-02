@@ -161,7 +161,17 @@ class Control:
         self._echo("added new task #{}".format(task.id))
         return task
    
-
+    # adjust time (min) for a certain task 
+    def adjust(self,id,time_in_min):
+        """Adjust time for a certain task
+        
+        Args:
+           id (int): task id
+           time_in_min (int): time in min to adjust (negative/positive)
+        """
+        task = self.gettask(id)
+        task.adjust_starttime(time_in_min)
+        
     def clear(self):
         """Clear all tasks"""
         self.tasks = {}
@@ -180,7 +190,7 @@ class Control:
         
         # table header
         # TODO dynamisch machen
-        self._printtable(("id","spend","start","created","status","name"))
+        self._printtable(("id","spend","upd","created","status","name"))
         
         # print active task first
         if (self.currenttask):
@@ -287,10 +297,10 @@ class Control:
     #
     def _printtask(self,task,max_len=36):
         dur_sec = Util.format_duration(task.duration)
-        starttime = Util.format_minutes(task.start)
+        updated = Util.format_minutes(task.updated)
         createtime = Util.format_minutes(task.created)
         status = task.status_to_str()
-        self._printtable((task.id,dur_sec,starttime,createtime,status,task.name[0:min(len(task.name,max_len))]))
+        self._printtable((task.id,dur_sec,updated,createtime,status,task.name[0:min(len(task.name),max_len)]))
     
     def _is_current(self,task):
         return self.currenttask.id == task.id
@@ -309,14 +319,14 @@ class Control:
         self.currenttask = task
         
         # reset starttime
-        self.currenttask.start = Util.now_sec()
+        self.currenttask.reset_start()
          
     def _update(self):
         if (self.currenttask != None):
             now = Util.now_sec()
             self.currenttask.update_duration(now)
             # reset start
-            self.currenttask.start = now
+            #self.currenttask.start = now
             
     def __nextid(self):
         self.idgen = self.idgen + 1
