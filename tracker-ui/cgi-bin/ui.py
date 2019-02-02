@@ -1,4 +1,4 @@
-#!C:\Program Files (x86)\Python\python.exe
+#!C:\Python36\python.exe
 
 import sys
 import cgi
@@ -16,10 +16,10 @@ doprint = "no"
 URL = "http://localhost:8080/cgi-bin/ui.py"
 dbfile = "c:/Users/gitrust/timer.db"
 
-if form.has_key('view'):
+if "view" in form:
     doview = form.getfirst("view").lower()
 
-if form.has_key('doprint'):
+if "doprint" in form:
     doprint = form['doprint'].value
 
 def get_data():
@@ -35,7 +35,7 @@ def get_data():
     elif doview == "byday":
         data = Util.get_task_list_beforeyesterday(dbfile)        
     elif doview == "today":
-        data = Util.get_task_list_today(dbfile)	
+        data = Util.get_task_list_today(dbfile)    
     elif doview == "oneweek":
         data = Util.get_task_list_oneweek(dbfile)
     else:
@@ -83,22 +83,22 @@ def _href_btn(link,name,active=False):
 def output_navigation():
     print ('<ul class="nav nav-pills">')
     # Configuration
-    _href_btn(URL+"?view=task","alle Tasks",(doview == "task"))
-    _href_btn(URL+"?view=day","nach Tagen",(doview == "day"))
-    _href_btn(URL+"?view=byday","Vorgestern",(doview == "byday"))	
-    _href_btn(URL+"?view=yday","Gestern",(doview == "yday"))	
-    _href_btn(URL+"?view=today","Heute",(doview == "today"))		
-    _href_btn(URL+"?view=oneweek","1 Woche",(doview == "oneweek"))
-    _href_btn(URL+"?view=week","nach Wochen",(doview == "week"))
+    _href_btn(URL+"?view=task","all Tasks",(doview == "task"))
+    _href_btn(URL+"?view=day","by Day",(doview == "day"))
+    _href_btn(URL+"?view=byday","Before Yesterday",(doview == "byday"))    
+    _href_btn(URL+"?view=yday","Yesterday",(doview == "yday"))    
+    _href_btn(URL+"?view=today","Today",(doview == "today"))        
+    _href_btn(URL+"?view=oneweek","1 Week",(doview == "oneweek"))
+    _href_btn(URL+"?view=week","by Weeks",(doview == "week"))
     _href_btn(URL+"?view=dailyscrum","Daily Scrum",(doview == "dailyscrum"))
     _href_btn(URL+"?doprint=y&view="+doview,"Print")
     print ('</ul>')
 
 def to_print(obj):
-	if isinstance(obj, basestring):
-		if isinstance(obj, unicode):
-			obj = obj.encode('utf-8')
-	return obj
+    if isinstance(obj, basestring):
+        if isinstance(obj, unicode):
+            obj = obj.encode('utf-8')
+    return obj
 
 def output_chart(data):
     data = Util.get_task_for_chart(dbfile,doview)
