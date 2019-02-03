@@ -4,6 +4,7 @@ import sys
 import cgi
 import Util
 from cgi import *
+import os
 
 __author__      = "girust"
 __copyright__   = "Copyright 2014"
@@ -14,7 +15,7 @@ form = cgi.FieldStorage()
 doview = "yday"
 doprint = "no"
 URL = "http://localhost:8080/cgi-bin/ui.py"
-dbfile = "c:/Users/gitrust/timer.db"
+dbfile = os.getenv("USERPROFILE") + "/timer.db"
 
 if "view" in form:
     doview = form.getfirst("view").lower()

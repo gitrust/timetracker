@@ -175,7 +175,7 @@ class Timer:
                 self.control.adjust(id_from,time_in_min)
                 self.control.adjust(id_from,time_in_min*-1)
             # adjust time for one task
-			else:
+            else:
                 id = cmdlist[1]
                 time_in_min = cmdlist[2]
                 self.control.adjust(id,time_in_min)

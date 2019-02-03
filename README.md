@@ -2,6 +2,20 @@
 
 A personal time tracker written in python
 
+# How to start
+
+1. Setup database 
+
+    python setup.py 
+  
+2. Copy created sqlite database `timer.db` to your HOME directory
+
+3. Start timer
+
+    python timer.py
+    type `help`
+
+
 # Store
 
 This tool uses a local sqlite database to store tracking data
