@@ -13,7 +13,6 @@ import datetime
 import os
 from Control import Control
 
-
 class Timer:
     def __init__(self):
         self.control = Control()

@@ -189,7 +189,6 @@ class Control:
         pauseIsActive = self.currenttask and self.currenttask.type == Task.TYPE_PAUSE
         
         # table header
-        # TODO dynamisch machen
         self._printtable(("id","spend","upd","created","status","name"))
         
         # print active task first
@@ -306,7 +305,6 @@ class Control:
         return self.currenttask.id == task.id
         
     def _printtable(self,fields):
-        # TODO dynamisch machen
         print(str(fields[0]).rjust(5) + str(fields[1]).rjust(7) + str(fields[2]).rjust(8) + "  " + str(fields[3]).rjust(8) + "  " + str(fields[4]) + "\t" + str(fields[5]))
         
     def _echo(self,txt):
@@ -325,8 +323,6 @@ class Control:
         if (self.currenttask != None):
             now = Util.now_sec()
             self.currenttask.update_duration(now)
-            # reset start
-            #self.currenttask.start = now
             
     def __nextid(self):
         self.idgen = self.idgen + 1
