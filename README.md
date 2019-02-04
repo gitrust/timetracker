@@ -13,12 +13,13 @@ A personal time tracker written in python
 3. Start timer
 
     python timer.py
+    
     type `help`
 
 
 # Store
 
-This tool uses a local sqlite database to store tracking data
+This tool uses a local sqlite database file to store tracking data
 
 # List of available commands
 
