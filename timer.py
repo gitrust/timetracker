@@ -3,8 +3,7 @@
 """timer.py, main console programm to manage timer tasks """
 
 __author__      = "gitrust"
-__copyright__   = "Copyright 2014"
-__version__     = "0.9.6"
+__version__     = "0.9.7"
 __revision__    = "$Rev: 55 $"
 __status__      = "Dev"
 

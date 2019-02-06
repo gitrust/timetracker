@@ -3,7 +3,6 @@
 """Task.py - structure for Timer tasks """
 
 __author__      = "gitrust"
-__copyright__   = "Copyright 2014"
 __revision__    = "$Rev: 54 $"
 
 import Util

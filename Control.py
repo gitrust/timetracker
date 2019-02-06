@@ -3,11 +3,16 @@
 """ Control.py for creating and updating tasks """
 
 __author__      = "gitrust"
-__copyright__   = "Copyright 2014"
 __revision__    = "$Rev: 55 $"
 
 import Util
 from Task import Task
+from colorama import init
+from termcolor import colored
+from colorama import  Style, Fore, Back
+
+# colorama.init
+init(autoreset=True)
 
 class Control:
     def __init__(self):
@@ -189,7 +194,7 @@ class Control:
         pauseIsActive = self.currenttask and self.currenttask.type == Task.TYPE_PAUSE
         
         # table header
-        self._printtable(("id","spend","upd","created","status","name"))
+        self._printtableheader(("id","spend","upd","created","status","name"))
         
         # print active task first
         if (self.currenttask):
@@ -205,6 +210,7 @@ class Control:
                 if not list_all and task.status == Task.STATUS_DONE:
                     continue
                 self._printtask(task)
+        print()
 
 
         
@@ -306,7 +312,11 @@ class Control:
         
     def _printtable(self,fields):
         print(str(fields[0]).rjust(5) + str(fields[1]).rjust(7) + str(fields[2]).rjust(8) + "  " + str(fields[3]).rjust(8) + "  " + str(fields[4]) + "\t" + str(fields[5]))
-        
+
+    def _printtableheader(self,fields):
+        print(Fore.RED + Style.BRIGHT + str(fields[0]).rjust(5) + str(fields[1]).rjust(7) + 
+           str(fields[2]).rjust(8) + "  " + str(fields[3]).rjust(8) + "  " + str(fields[4]) + "\t" + str(fields[5]))
+
     def _echo(self,txt):
         print("  " + txt)
       

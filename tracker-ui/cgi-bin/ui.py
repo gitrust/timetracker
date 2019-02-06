@@ -14,7 +14,7 @@ __revision__    = "$Rev: 394 $"
 form = cgi.FieldStorage()
 doview = "yday"
 doprint = "no"
-URL = "http://localhost:80/cgi-bin/ui.py"
+URL = "http://localhost:8080/cgi-bin/ui.py"
 dbfile = os.getenv("USERPROFILE") + "/timer.db"
 
 if "view" in form:
@@ -96,6 +96,9 @@ def output_navigation():
     print ('</ul>')
 
 def to_print(obj):
+    if isinstance(obj, basestring):
+        if isinstance(obj, unicode):
+            obj = obj.encode('utf-8')
     return obj
 
 def output_chart(data):
@@ -108,10 +111,9 @@ def output_chart(data):
     print('       ["Task", "Hours per Day"],')
     
     for row in data:
-        name = row[0]
-        value = row[1]
-        print("      ['" + name + "', " + value + "],")
-      
+      name = row[0]
+      value = row[1]
+      print("      ['"+name+"', "+value+"],")
     print('    ]);')
     print('   var options = { ')
     print('     title: "Activity Chart (h)",')
