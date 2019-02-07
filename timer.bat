@@ -1,4 +1,5 @@
 @echo off
 
-set local
+setlocal
 python %~dp0\timer.py
+endlocal

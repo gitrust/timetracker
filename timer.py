@@ -3,7 +3,7 @@
 """timer.py, main console programm to manage timer tasks """
 
 __author__      = "gitrust"
-__version__     = "0.9.7"
+__version__     = "0.9.8"
 __revision__    = "$Rev: 55 $"
 __status__      = "Dev"
 
@@ -49,7 +49,7 @@ class Timer:
             exit(0)
         elif cmd in ("exp","export"):
             status = self.export(cmdlist)
-        elif cmd == "clear":
+        elif cmd in ("clear","cl"):
             status = self.clear(cmdlist)
         elif cmd == "done":
             status = self.done(cmdlist)
