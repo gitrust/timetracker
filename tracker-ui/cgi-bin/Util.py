@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
-""" Util.py with static functions """
+""" Util.py with helper functions """
 
 __author__      = "gitrust"
-__copyright__   = "Copyright 2014"
 __revision__    = "$Rev: 394 $"
 
 import datetime
@@ -86,6 +85,7 @@ SQL_CHARTQUERY = {
     "dailyscrum-61": "WHERE datetime(startdate,'unixepoch') > datetime('now','start of day','-61 hours')",
     "dailyscrum-13": "WHERE datetime(startdate,'unixepoch') > datetime('now','start of day','-13 hours')"
 }
+
 def format_duration(sec):
     """ Format duration in seconds
     

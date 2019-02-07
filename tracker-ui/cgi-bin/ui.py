@@ -7,37 +7,38 @@ from cgi import *
 import os
 
 __author__      = "girust"
-__copyright__   = "Copyright 2014"
 __revision__    = "$Rev: 394 $"
 
-
+PORT = 8080
 form = cgi.FieldStorage()
-doview = "yday"
+views = ('day','yday','today','byday','dailyscrum','oneweek')
+view = "yday"
+viewchart = True
 doprint = "no"
-URL = "http://localhost:8080/cgi-bin/ui.py"
+URL = "http://localhost:" + str(PORT) + "/cgi-bin/ui.py"
 dbfile = os.getenv("USERPROFILE") + "/timer.db"
 
 if "view" in form:
-    doview = form.getfirst("view").lower()
+    view = form.getfirst("view").lower()
 
 if "doprint" in form:
     doprint = form['doprint'].value
 
 def get_data():
         
-    if doview == "day":
+    if view == "day":
         data = Util.get_task_list_by_day(dbfile)
-    elif doview == "week":
+    elif view == "week":
         data = Util.get_task_list_by_week(dbfile)
-    elif doview == "dailyscrum":
+    elif view == "dailyscrum":
         data = Util.get_task_list_dailyscrum(dbfile)
-    elif doview == "yday":
+    elif view == "yday":
         data = Util.get_task_list_yesterday(dbfile)
-    elif doview == "byday":
+    elif view == "byday":
         data = Util.get_task_list_beforeyesterday(dbfile)        
-    elif doview == "today":
+    elif view == "today":
         data = Util.get_task_list_today(dbfile)    
-    elif doview == "oneweek":
+    elif view == "oneweek":
         data = Util.get_task_list_oneweek(dbfile)
     else:
         data = Util.get_task_list(dbfile)
@@ -84,25 +85,22 @@ def _href_btn(link,name,active=False):
 def output_navigation():
     print ('<ul class="nav nav-pills">')
     # Configuration
-    _href_btn(URL+"?view=task","all Tasks",(doview == "task"))
-    _href_btn(URL+"?view=day","by Day",(doview == "day"))
-    _href_btn(URL+"?view=byday","Before Yesterday",(doview == "byday"))    
-    _href_btn(URL+"?view=yday","Yesterday",(doview == "yday"))    
-    _href_btn(URL+"?view=today","Today",(doview == "today"))        
-    _href_btn(URL+"?view=oneweek","1 Week",(doview == "oneweek"))
-    _href_btn(URL+"?view=week","by Weeks",(doview == "week"))
-    _href_btn(URL+"?view=dailyscrum","Daily Scrum",(doview == "dailyscrum"))
-    _href_btn(URL+"?doprint=y&view="+doview,"Print")
+    _href_btn(URL+"?view=task","all Tasks",(view == "task"))
+    _href_btn(URL+"?view=day","by Day",(view == "day"))
+    _href_btn(URL+"?view=byday","Before Yesterday",(view == "byday"))    
+    _href_btn(URL+"?view=yday","Yesterday",(view == "yday"))    
+    _href_btn(URL+"?view=today","Today",(view == "today"))        
+    _href_btn(URL+"?view=oneweek","1 Week",(view == "oneweek"))
+    _href_btn(URL+"?view=week","by Weeks",(view == "week"))
+    _href_btn(URL+"?view=dailyscrum","Daily Scrum",(view == "dailyscrum"))
+    _href_btn(URL+"?doprint=y&view="+view,"Print")
     print ('</ul>')
 
 def to_print(obj):
-    if isinstance(obj, basestring):
-        if isinstance(obj, unicode):
-            obj = obj.encode('utf-8')
     return obj
 
 def output_chart(data):
-    data = Util.get_task_for_chart(dbfile,doview)
+    data = Util.get_task_for_chart(dbfile,view)
     print('<script type="text/javascript">')
     print('  google.charts.load("current", {packages:["corechart"]});')
     print('  google.charts.setOnLoadCallback(drawChart);')
@@ -170,8 +168,8 @@ def output_body():
     print ('<p>')
     print ('</div>')
     
-    if doview in ('day','yday','today','byday','dailyscrum','oneweek'):
-        output_chart(data)
+    if viewchart and view in views:
+            output_chart(data)
 
     
 # Execution
