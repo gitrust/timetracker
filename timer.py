@@ -173,10 +173,12 @@ class Timer:
                 self.control.adjust(id_from,time_in_min)
                 self.control.adjust(id_from,time_in_min*-1)
             # adjust time for one task
-            else:
+            elif arglen == 3:
                 id = cmdlist[1]
                 time_in_min = cmdlist[2]
                 self.control.adjust(id,time_in_min)
+            else:
+                raise Exception("")
         except Exception as e:
             print (str(e))
             return [1,"Usage: adjust <id_from> [id_to] [-]<time_in_min>"]
