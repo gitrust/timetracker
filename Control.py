@@ -62,19 +62,22 @@ class Control:
             
         # set pause task to active, 
         # it is the task with the first id
-        self._setcurrent(self.tasks["1"]) 
+        for key in self.tasks:
+            t = self.tasks[key]
+            if t.type == Task.TYPE_PAUSE:
+                self._setcurrent(t)
  
     def commit(self,id):
         """Commit a task with specific id.
            If a task exist with this id, it will be set to done
            and a new task with the same name will be created and
-           scheduled immidiately.
+           scheduled immediately.
         """
         task = self.gettask(id)
         
         # dont commit pause tasks
         # only active tasks are committed
-        if task and task.type != Task.TYPE_PAUSE and task.status == Task.STATUS_ACTIVE:
+        if task and task.type != Task.TYPE_PAUSE and task.status in (Task.STATUS_ACTIVE, Task.STATUS_INACTIVE):
             # copy task name
             name = task.name
             is_current = self._is_current(task)
@@ -194,7 +197,7 @@ class Control:
         pauseIsActive = self.currenttask and self.currenttask.type == Task.TYPE_PAUSE
         
         # table header
-        self._printtableheader(("id","spend","upd","created","status","name"))
+        self._printtableheader(("id","spend","update","created","status","title"))
         
         # print active task first
         if (self.currenttask):
@@ -328,9 +331,15 @@ class Control:
       
     def _setcurrent(self,task):
         self._update()
-                
+        
+        # deactivate previous task
+        oldTask = self.currenttask
+        if oldTask and oldTask.id != task.id:
+            oldTask.deactivate()
+        
         # set the new task to current
         self.currenttask = task
+        self.currenttask.status = Task.STATUS_ACTIVE
         
         # reset starttime
         self.currenttask.reset_start()

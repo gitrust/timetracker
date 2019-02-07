@@ -3,7 +3,6 @@
 """ Util.py with static functions """
 
 __author__      = "gitrust"
-__copyright__   = "Copyright 2014"
 __revision__    = "$Rev: 229 $"
 
 import datetime
