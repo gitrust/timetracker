@@ -305,7 +305,13 @@ class Control:
         updated = Util.format_minutes(task.updated)
         createtime = Util.format_minutes(task.created)
         status = task.status_to_str()
-        self._printtable((task.id,dur_sec,updated,createtime,status,task.name[0:min(len(task.name),max_len)]))
+        current_task = self._is_current(task)
+        task_id = task.id
+        
+        # mark current active task
+        if current_task:
+            task_id = "> " + str(task.id)
+        self._printtable((task_id,dur_sec,updated,createtime,status,task.name[0:min(len(task.name),max_len)]))
     
     def _is_current(self,task):
         return self.currenttask.id == task.id
