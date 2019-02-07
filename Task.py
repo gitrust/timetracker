@@ -11,7 +11,7 @@ class Task:
     # type
     TYPE_NORMAL, TYPE_PAUSE = range(2)
     # status
-    STATUS_DONE, STATUS_ACTIVE = range(2)
+    STATUS_DONE, STATUS_ACTIVE, STATUS_INACTIVE = range(3)
     
     def __init__(self, id, name, start,type=TYPE_NORMAL):
         """
@@ -42,7 +42,10 @@ class Task:
         # reset to new start
         self.start = now
         self.updated = now
-        
+    
+    def deactivate(self):
+        self.status = Task.STATUS_INACTIVE
+     
     def done(self):
         """Set status of this task to STATUS_DONE """
         self.status = Task.STATUS_DONE
@@ -59,7 +62,9 @@ class Task:
         if self.status == Task.STATUS_DONE:
             return "DONE"
         elif self.status == Task.STATUS_ACTIVE:
-            return "ACTIVE"
+            return "ON"
+        elif self.status == Task.STATUS_INACTIVE:
+            return "OFF"
         return "UNKNOWN"
 
     def reset_start(self):
