@@ -213,7 +213,6 @@ class Control:
                 if not list_all and task.status == Task.STATUS_DONE:
                     continue
                 self._printtask(task)
-        print()
 
 
         

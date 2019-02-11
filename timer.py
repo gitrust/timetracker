@@ -229,6 +229,7 @@ def main():
         if result[0] != 0:
             # print error message from command
             print (str(result[1]))
+        print()
         continue
 
 if  __name__ =='__main__': main()
