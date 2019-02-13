@@ -205,10 +205,9 @@ class Timer:
         return [0]        
      
     def list(self,cmd):
-        list_all = len(cmd) > 1 and cmd[1] == "all"
+        list_all = len(cmd) > 1 "all" in cmd
         self.control.list(list_all)
         
-        # todo description for command syntax
         return [0]
         
     def beforeexit(self,cmd):
