@@ -205,7 +205,7 @@ class Timer:
         return [0]        
      
     def list(self,cmd):
-        list_all = len(cmd) > 1 "all" in cmd
+        list_all = len(cmd) > 1 and "all" in cmd
         self.control.list(list_all)
         
         return [0]
