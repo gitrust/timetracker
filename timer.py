@@ -3,7 +3,7 @@
 """timer.py, main console programm to manage timer tasks """
 
 __author__      = "gitrust"
-__version__     = "0.9.8"
+__version__     = "0.9.9"
 __revision__    = "$Rev: 55 $"
 __status__      = "Dev"
 
@@ -11,6 +11,8 @@ import sys
 import datetime
 import os
 from Control import Control
+
+DBFILE = os.getenv("USERPROFILE") + "/timer.db"
 
 class Timer:
     def __init__(self):
@@ -138,11 +140,10 @@ class Timer:
         
     def export(self,cmd):
         now = datetime.datetime.now()
-        filename = os.getenv("USERPROFILE") + "/timer.json"
         export_ok = False
         
         try:        
-            export_ok = self.control.export_to_json(filename)
+            export_ok = self.control.export_to_json(DBFILE)
         except:
             export_ok = False
         
@@ -151,14 +152,12 @@ class Timer:
         return [0]
     
     def export_to_db(self):
-        filename = os.getenv("USERPROFILE") + "/timer.db"
-        print("export to " + filename)
-        self.control.export_to_db(filename)
+        print("export to " + DBFILE)
+        self.control.export_to_db(DBFILE)
         return [0]
     
     def push(self,cmdlist):
-        filename = os.getenv("USERPROFILE") + "/timer.db"
-        self.control.push(filename)
+        self.control.push(DBFILE)
         return [0]
 
     def adjust(self,cmdlist):

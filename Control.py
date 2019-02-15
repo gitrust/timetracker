@@ -81,6 +81,8 @@ class Control:
             # copy task name
             name = task.name
             is_current = self._is_current(task)
+                        
+            self._get_pause_task().deactivate()
             
             self.done(id)
             
@@ -213,9 +215,7 @@ class Control:
                 if not list_all and task.status == Task.STATUS_DONE:
                     continue
                 self._printtask(task)
-
-
-        
+                
     def export_to_json(self,filename):
         """Export all tasks in json format to a file
         
