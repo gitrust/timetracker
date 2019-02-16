@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" Util.py with static functions """
+""" util.py with static functions """
 
 __author__      = "gitrust"
 __revision__    = "$Rev: 229 $"

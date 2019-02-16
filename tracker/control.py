@@ -5,8 +5,8 @@
 __author__      = "gitrust"
 __revision__    = "$Rev: 55 $"
 
-import Util
-from Task import Task
+import util
+from task import Task
 from colorama import init
 from termcolor import colored
 from colorama import  Style, Fore, Back
@@ -30,7 +30,7 @@ class Control:
             self._echo("active:\t#{} {}".format(self.currenttask.id,self.currenttask.name))
         
         # check for pause task
-        self._echo("pause:\t{}h".format(Util.format_duration(self.tasks["1"].duration)))
+        self._echo("pause:\t{}h".format(util.format_duration(self.tasks["1"].duration)))
         
         # day work time
         sum = 0
@@ -40,13 +40,13 @@ class Control:
         pausetime = self._get_pause_task().duration
         # minus pause time
         sum = sum - pausetime
-        self._echo("worktime:\t{}h".format(Util.format_duration(sum)))
+        self._echo("worktime:\t{}h".format(util.format_duration(sum)))
         
         # start time of the day
-        self._echo("started:\t{}".format(Util.format_starttime(self.tasks)))
+        self._echo("started:\t{}".format(util.format_starttime(self.tasks)))
         
         # presumambly end time
-        self._echo("8hours:\t{}".format(Util.format_endtime(self.tasks)))
+        self._echo("8hours:\t{}".format(util.format_endtime(self.tasks)))
 
         # nr of tasks
         self._echo("tasks:\t{}".format(len(self.tasks)))
@@ -57,7 +57,7 @@ class Control:
 
         # create a pause task
         if len(self.tasks) == 0:
-            task = Task(self.__nextid(),"pause",Util.now_sec(),Task.TYPE_PAUSE)
+            task = Task(self.__nextid(),"pause",util.now_sec(),Task.TYPE_PAUSE)
             self.tasks[str(task.id)] = task
             
         # set pause task to active, 
@@ -164,7 +164,7 @@ class Control:
         """
         
         # create new task
-        task = Task(self.__nextid(), name, Util.now_sec())
+        task = Task(self.__nextid(), name, util.now_sec())
         self.tasks[str(task.id)] = task
         if set_to_current:
             self._setcurrent(task)
@@ -292,7 +292,7 @@ class Control:
             mylist.append(data)
         
         if len(mylist) > 0:
-            Util.export_to_db(mylist,filename)
+            util.export_to_db(mylist,filename)
             return True
         return False
     
@@ -303,9 +303,9 @@ class Control:
     # private functions
     #
     def _printtask(self,task,max_len=36):
-        dur_sec = Util.format_duration(task.duration)
-        updated = Util.format_minutes(task.updated)
-        createtime = Util.format_minutes(task.created)
+        dur_sec = util.format_duration(task.duration)
+        updated = util.format_minutes(task.updated)
+        createtime = util.format_minutes(task.created)
         status = task.status_to_str()
         current_task = self._is_current(task)
         task_id = task.id
@@ -345,7 +345,7 @@ class Control:
          
     def _update(self):
         if (self.currenttask != None):
-            now = Util.now_sec()
+            now = util.now_sec()
             self.currenttask.update_duration(now)
             
     def __nextid(self):

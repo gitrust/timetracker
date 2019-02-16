@@ -5,7 +5,7 @@
 __author__      = "gitrust"
 __revision__    = "$Rev: 54 $"
 
-import Util
+import util
 
 class Task:
     # type
@@ -33,7 +33,7 @@ class Task:
     
     def touch(self):
         """Rest last access time for this task """
-        self.start = Util.now_sec()
+        self.start = util.now_sec()
         self.updated = self.start
      
     def update_duration(self,now):
@@ -49,7 +49,7 @@ class Task:
     def done(self):
         """Set status of this task to STATUS_DONE """
         self.status = Task.STATUS_DONE
-        self.updated = Util.now_sec()
+        self.updated = util.now_sec()
     
     def type_to_str(self):
         if self.type == Task.TYPE_NORMAL:
@@ -68,11 +68,11 @@ class Task:
         return "UNKNOWN"
 
     def reset_start(self):
-        self.start = Util.now_sec()
+        self.start = util.now_sec()
         
     def adjust_starttime(self,timeinmin):
         self.duration = self.duration + (int(timeinmin) * 60)
-        self.updated = Util.now_sec()
+        self.updated = util.now_sec()
         
     def exp(self):
         """Export task fields as json string"""
@@ -81,7 +81,7 @@ class Task:
      
 
     def __str__(self):
-        return "{id:" + str(self.id).rjust(3) + ", dur:" + Util.format_duration(self.duration) + ", upd:" + Util.format_minutes(self.updated) +  ", name:'" + self.name + "'}"
+        return "{id:" + str(self.id).rjust(3) + ", dur:" + util.format_duration(self.duration) + ", upd:" + util.format_minutes(self.updated) +  ", name:'" + self.name + "'}"
 
     
     

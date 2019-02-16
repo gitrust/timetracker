@@ -3,18 +3,17 @@
 """timer.py, main console programm to manage timer tasks """
 
 __author__      = "gitrust"
-__version__     = "0.9.9"
-__revision__    = "$Rev: 55 $"
+__version__     = "0.9.10"
 __status__      = "Dev"
 
 import sys
 import datetime
 import os
-from Control import Control
+from control import Control
 
 DBFILE = os.getenv("USERPROFILE") + "/timer.db"
 
-class Timer:
+class Tracker:
     def __init__(self):
         self.control = Control()
         print("time tracker V" + __version__)
@@ -214,15 +213,15 @@ class Timer:
         
 
 def main():
-    timer = Timer()
-    timer.pause([])
+    tracker = Tracker()
+    tracker.pause([])
        
     
     while True:
         now = datetime.datetime.now().strftime('%H:%M')
         prompt = now + " > "
         
-        result = timer.exec_command(prompt)
+        result = tracker.exec_command(prompt)
         
         if result[0] != 0:
             # print error message from command
