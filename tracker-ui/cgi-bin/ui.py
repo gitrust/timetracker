@@ -2,7 +2,7 @@
 
 import sys
 import cgi
-import Util
+import util
 from cgi import *
 import os
 
@@ -27,21 +27,21 @@ if "doprint" in form:
 def get_data():
         
     if view == "day":
-        data = Util.get_task_list_by_day(dbfile)
+        data = util.get_task_list_by_day(dbfile)
     elif view == "week":
-        data = Util.get_task_list_by_week(dbfile)
+        data = util.get_task_list_by_week(dbfile)
     elif view == "dailyscrum":
-        data = Util.get_task_list_dailyscrum(dbfile)
+        data = util.get_task_list_dailyscrum(dbfile)
     elif view == "yday":
-        data = Util.get_task_list_yesterday(dbfile)
+        data = util.get_task_list_yesterday(dbfile)
     elif view == "byday":
-        data = Util.get_task_list_beforeyesterday(dbfile)        
+        data = util.get_task_list_beforeyesterday(dbfile)        
     elif view == "today":
-        data = Util.get_task_list_today(dbfile)    
+        data = util.get_task_list_today(dbfile)    
     elif view == "oneweek":
-        data = Util.get_task_list_oneweek(dbfile)
+        data = util.get_task_list_oneweek(dbfile)
     else:
-        data = Util.get_task_list(dbfile)
+        data = util.get_task_list(dbfile)
     return data
 
 def output_table(data):    
@@ -100,7 +100,7 @@ def to_print(obj):
     return obj
 
 def output_chart(data):
-    data = Util.get_task_for_chart(dbfile,view)
+    data = util.get_task_for_chart(dbfile,view)
     print('<script type="text/javascript">')
     print('  google.charts.load("current", {packages:["corechart"]});')
     print('  google.charts.setOnLoadCallback(drawChart);')

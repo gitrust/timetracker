@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" Util.py with helper functions """
+""" util.py with helper functions """
 
 __author__      = "gitrust"
 __revision__    = "$Rev: 394 $"
