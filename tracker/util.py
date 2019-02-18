@@ -12,7 +12,7 @@ import time
 try:
     import sqlite3
 except ImportError:
-    print("could not import sqlite3")
+    print("Could not import sqlite3")
     
 def format_duration(sec):
     """ Format duration in seconds
@@ -98,8 +98,9 @@ def export_to_db(data, dbfile):
       data (list with dictionaries)   - list with dictionary data
       dbfile (str) - path to sqlite database file
     """
+    
     list_with_tuples=[]
-    # TODO convert data into list with tuples
+    
     for d in data:
         tup = (d["id"],d["name"],d["start"],d["duration"],d["type"],d["status"],d["created"])
         list_with_tuples.append(tup)
@@ -107,8 +108,7 @@ def export_to_db(data, dbfile):
     db = sqlite3.connect(dbfile)
     cursor = db.cursor()
     
-    cursor.executemany('''INSERT INTO task(taskid,name,startdate,duration,tasktype,taskstatus,createddate)
-                      VALUES(?,?,?,?,?,?,?)''',list_with_tuples)
+    cursor.executemany('''INSERT INTO task(taskid,name,startdate,duration,tasktype,taskstatus,createddate)  VALUES(?,?,?,?,?,?,?)''',list_with_tuples)
     db.commit()    
     db.close()
     

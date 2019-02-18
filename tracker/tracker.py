@@ -12,6 +12,7 @@ import os
 from control import Control
 
 DBFILE = os.getenv("USERPROFILE") + "/timer.db"
+JSONFILE = os.getenv("USERPROFILE") + "/timer.json"
 
 class Tracker:
     def __init__(self):
@@ -142,7 +143,7 @@ class Tracker:
         export_ok = False
         
         try:        
-            export_ok = self.control.export_to_json(DBFILE)
+            export_ok = self.control.export_to_json(JSONFILE)
         except:
             export_ok = False
         

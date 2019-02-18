@@ -1,5 +1,5 @@
 @echo off
 
 setlocal
-python %~dp0\timer.py
+python %~dp0tracker\tracker.py
 endlocal
