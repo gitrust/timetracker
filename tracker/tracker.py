@@ -75,20 +75,20 @@ class Tracker:
     
     def printhelp(self,cmd):
         print("Available commands: ")
-        print(" #<id>\t\tactivate an existing task using its id")
-        print(" add,a\t\tadd a new task and activate it")
-        print(" adjust\t\ttrasnfer time of one task to another or adjust time of a task")
+        print(" #<id>\t\tactivate an existing task by id")
+        print(" add,a\t\tadd a new task and set to current")
+        print(" adjust\t\tadjust time of a task")
         print(" clear,cl\tclear all tasks")
         print(" commit,ci\tcommit a task with specific id")
-        print(" done\t\tset task to done")
-        print(" export,exp\texport current data")
+        print(" done\t\tset a task to done")
+        print(" export,exp\texport current task list to json")
         print(" help,h\t\tthis help")
-        print(" list,l,ls\tlist all available tasks")
-        print(" pause,p\tpause tasks")
-        print(" push\t\tpush all done tasks to repository db and remove them from current list")
+        print(" list,l,ls\tlist tasks, to see done tasks use - list all")
+        print(" pause,p\tset pause task to current")
+        print(" push\t\tpush all done tasks to storage and remove them from list")
         print(" rename,ren\trename a task")
-        print(" remove,rm\tremove task")
-        print(" status,st\tstatus about current task")
+        print(" remove,rm\tremove a task")
+        print(" status,st\tstatus information")
         return [0] 
     
     def parsecommand(self,commandtext):
