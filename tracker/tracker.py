@@ -51,8 +51,6 @@ class Tracker:
             exit(0)
         elif cmd in ("exp","export"):
             status = self.export(cmdlist)
-        elif cmd in ("clear","cl"):
-            status = self.clear(cmdlist)
         elif cmd == "done":
             status = self.done(cmdlist)
         elif cmd == "push":
@@ -78,7 +76,6 @@ class Tracker:
         print(" #<id>\t\tactivate an existing task by id")
         print(" add,a\t\tadd a new task and set to current")
         print(" adjust\t\tadjust time of a task")
-        print(" clear,cl\tclear all tasks")
         print(" commit,ci\tcommit a task with specific id")
         print(" done\t\tset a task to done")
         print(" export,exp\texport current task list to json")
@@ -185,10 +182,6 @@ class Tracker:
         
     def pause(self, cmd):
         self.control.pause()
-        return [0]
-
-    def clear(self,cmd):
-        self.control.clear()
         return [0]
 
     def status(self,cmd):

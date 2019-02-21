@@ -182,11 +182,6 @@ class Control:
         task = self.gettask(id)
         task.adjust_starttime(time_in_min)
         
-    def clear(self):
-        """Clear all tasks"""
-        self.tasks = {}
-                    
-  
     def list(self,list_all=False):
         """Print all available tasks
         
