@@ -198,7 +198,13 @@ class Tracker:
      
     def list(self,cmd):
         list_all = len(cmd) > 1 and "all" in cmd
-        self.control.list(list_all)
+        list_yesterday = len(cmd) > 1 and "yesterday" in cmd
+        
+        if list_yesterday:
+            self.control.list_yesterday(DBFILE)
+        else:
+            self.control.list(list_all)
+        
         
         return [0]
         
@@ -217,7 +223,7 @@ def main():
         
         result = tracker.exec_command(prompt)
         
-        if result[0] != 0:
+        if result and result[0] != 0:
             # print error message from command
             print (str(result[1]))
         print()

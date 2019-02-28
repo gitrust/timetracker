@@ -210,6 +210,17 @@ class Control:
                 if not list_all and task.status == Task.STATUS_DONE:
                     continue
                 self._printtask(task)
+    
+    def list_yesterday(self, dbfile):
+        """ Print all tasks from yesterday """
+        
+        # table header
+        self._printtableheader(("id","spend","update","created","status","title"))
+        
+        tasks = util.load_tasks_yesterday(dbfile)
+        for task in tasks:
+            self._printtask(task)
+        
                 
     def export_to_json(self,filename):
         """Export all tasks in json format to a file

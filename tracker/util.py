@@ -7,7 +7,7 @@ __revision__    = "$Rev: 229 $"
 
 import datetime
 import time
-
+from task import Task
 
 try:
     import sqlite3
@@ -25,6 +25,15 @@ def format_duration(sec):
     min = remainder//60
     ftime = "%s:%s" % (str(hours).rjust(2,'0'),str(min).rjust(2,'0'))
     return str(ftime).rjust(5)
+
+def format_time(ts):
+    """Format time in HH:MM
+    
+    Args:
+      ts (int) seconds since begin of epoch
+    """
+    time = datetime.datetime.fromtimestamp(ts)
+    return str(time.strftime("%d.%m.%y %H:%M"))
     
 def format_minutes(ts):
     """Format time in HH:MM
@@ -111,4 +120,38 @@ def export_to_db(data, dbfile):
     cursor.executemany('''INSERT INTO task(taskid,name,startdate,duration,tasktype,taskstatus,createddate)  VALUES(?,?,?,?,?,?,?)''',list_with_tuples)
     db.commit()    
     db.close()
+ 
+def load_tasks_yesterday(dbfile):
+    """Load tasks from datastore"""
+    sql = """
+    
+     SELECT  taskid,name,startdate,duration,tasktype,taskstatus,createddate
+     FROM Task 
+     WHERE datetime(startdate,'unixepoch') >= datetime('now','start of day','-1 day')
+     GROUP BY name
+     ORDER BY startdate desc
+     """
+    db = sqlite3.connect(dbfile)
+    cursor = db.cursor()
+    
+    tasks = []
+    try:
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        for row in rows:
+            
+            id = int(row[0])
+            name = row[1]
+            start = row[2]
+            t = Task(id,name,start)
+            t.duration = int(row[3])
+            t.set_typestr(row[4])
+            t.set_statusstr(row[5])
+            t.created = int(row[6])
+            
+            tasks.append(t)        
+    finally:
+        cursor.close()
+        db.close()
+    return tasks
     

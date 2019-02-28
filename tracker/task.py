@@ -9,7 +9,7 @@ import util
 
 class Task:
     # type
-    TYPE_NORMAL, TYPE_PAUSE = range(2)
+    TYPE_NORMAL, TYPE_PAUSE, TYPE_UNKNOWN = range(3)
     # status
     STATUS_DONE, STATUS_ACTIVE, STATUS_INACTIVE = range(3)
     
@@ -51,6 +51,28 @@ class Task:
         self.status = Task.STATUS_DONE
         self.updated = util.now_sec()
     
+    def set_typestr(self,type):
+        """Set type as string"""
+        
+        if type in 'NORMAL':
+            self.type = Task.TYPE_NORMAL
+        elif type in 'PAUSE':
+            self.type = Task.TYPE_PAUSE
+        else :
+            self.type = Task.TYPE_UNKOWN
+    
+    def set_statusstr(self,status):
+        """Set status as string"""
+        
+        if status in 'DONE':
+            self.status = Task.STATUS_DONE
+        elif status in 'ON':
+            self.status = Task.STATUS_ACTIVE
+        elif status in 'OFF':
+            self.status = Task.STATUS_INACTIVE
+        else:
+            self.status = Task.STATUS_INACTIVE
+            
     def type_to_str(self):
         if self.type == Task.TYPE_NORMAL:
             return "NORMAL"
