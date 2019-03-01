@@ -3,7 +3,6 @@
 """ util.py with static functions """
 
 __author__      = "gitrust"
-__revision__    = "$Rev: 229 $"
 
 import datetime
 import time
@@ -116,13 +115,15 @@ def export_to_db(data, dbfile):
     
     db = sqlite3.connect(dbfile)
     cursor = db.cursor()
-    
-    cursor.executemany('''INSERT INTO task(taskid,name,startdate,duration,tasktype,taskstatus,createddate)  VALUES(?,?,?,?,?,?,?)''',list_with_tuples)
-    db.commit()    
-    db.close()
+    try:
+        cursor.executemany('''INSERT INTO task(taskid,name,startdate,duration,tasktype,taskstatus,createddate)  VALUES(?,?,?,?,?,?,?)''',list_with_tuples)
+        db.commit()
+    finally:
+        cursor.close()
+        db.close()
  
 def load_tasks_yesterday(dbfile):
-    """Load tasks from datastore"""
+    """Load tasks from datastore which were tracked since yesterday"""
     sql = """
     
      SELECT  taskid,name,startdate,duration,tasktype,taskstatus,createddate
@@ -138,8 +139,8 @@ def load_tasks_yesterday(dbfile):
     try:
         cursor.execute(sql)
         rows = cursor.fetchall()
-        for row in rows:
-            
+        
+        for row in rows:            
             id = int(row[0])
             name = row[1]
             start = row[2]

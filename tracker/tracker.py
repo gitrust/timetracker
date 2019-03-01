@@ -80,7 +80,7 @@ class Tracker:
         print(" done\t\tset a task to done")
         print(" export,exp\texport current task list to json")
         print(" help,h\t\tthis help")
-        print(" list,l,ls\tlist tasks, to see done tasks use - list all")
+        print(" list,l,ls\tlist tasks, to see done tasks use, parameters [all, yesterday, yd]")
         print(" pause,p\tset pause task to current")
         print(" push\t\tpush all done tasks to storage and remove them from list")
         print(" rename,ren\trename a task")
@@ -198,14 +198,13 @@ class Tracker:
      
     def list(self,cmd):
         list_all = len(cmd) > 1 and "all" in cmd
-        list_yesterday = len(cmd) > 1 and "yesterday" in cmd
+        list_yesterday = len(cmd) > 1 and ("yesterday" in cmd or "yd" in cmd)
         
         if list_yesterday:
             self.control.list_yesterday(DBFILE)
         else:
             self.control.list(list_all)
-        
-        
+                
         return [0]
         
     def beforeexit(self,cmd):
