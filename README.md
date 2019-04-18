@@ -18,7 +18,7 @@ A time tracker for personal usage, written in python, command-line
 
 # Store
 
-This tool uses a Sqlite database
+Uses a Sqlite database to store all task data
 
 # List of available commands
 
@@ -28,9 +28,9 @@ This tool uses a Sqlite database
     clear,cl       clear all tasks
     commit,ci      commit a task with specific id
     done           set task to done
-    export,exp     export current data
+    export,exp     export data (current day) as JSON
     help,h         this help
-    list,l,ls      list all available tasks
+    list,l,ls      list all available tasks (ls all; ls yesterday; ls)
     pause,p        pause tasks
     push           push all done tasks to store and remove them from current list
     rename,ren     rename a task
