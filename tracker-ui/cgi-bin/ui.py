@@ -6,8 +6,7 @@ import util
 from cgi import *
 import os
 
-__author__      = "girust"
-__revision__    = "$Rev: 394 $"
+__author__      = "gitrust"
 
 PORT = 8080
 form = cgi.FieldStorage()
@@ -99,6 +98,7 @@ def output_navigation():
 def to_print(obj):
     return obj
 
+# google charts
 def output_chart(data):
     data = util.get_task_for_chart(dbfile,view)
     print('<script type="text/javascript">')

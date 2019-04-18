@@ -1,9 +1,8 @@
 ﻿#!/usr/bin/env python
 
-"""Task.py - structure for Timer tasks """
+"""Task.py - structure for tracker tasks """
 
 __author__      = "gitrust"
-__revision__    = "$Rev: 54 $"
 
 import util
 

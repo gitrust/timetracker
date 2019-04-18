@@ -1,9 +1,8 @@
 ﻿#!/usr/bin/env python
 
-""" Control.py for creating and updating tasks """
+""" control.py for creating and updating tasks """
 
 __author__      = "gitrust"
-__revision__    = "$Rev: 55 $"
 
 import util
 from task import Task

@@ -1,6 +1,6 @@
 ﻿#!/usr/bin/env python
 
-"""timer.py, main console programm to manage timer tasks """
+"""tracker.py, main console programm to track tasks """
 
 __author__      = "gitrust"
 __version__     = "0.9.10"
@@ -20,7 +20,7 @@ class Tracker:
         print("time tracker V" + __version__)
 
     def exec_command(self,prompt):
-        # builtin weiche zwischen verschiedenen python versionen
+        # python version switch
         if 'raw_input' in dir(__builtins__):
             rawcmd =  raw_input(prompt)
         else:
