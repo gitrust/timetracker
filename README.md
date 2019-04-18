@@ -1,24 +1,24 @@
 # timetracker
 
-A personal time tracker written in python
+A time tracker for personal usage, written in python, command-line
 
 # How to start
 
 1. Setup database 
 
-    python setup.py 
+    python setup.py
   
 2. Copy created sqlite database `timer.db` to your HOME directory
 
-3. Start timer
+3. Start timetracker
 
-    python timer.py
+    python tracker.py
     type `help`
 
 
 # Store
 
-This tool uses a local sqlite database to store tracking data
+This tool uses a Sqlite database
 
 # List of available commands
 
@@ -39,7 +39,7 @@ This tool uses a local sqlite database to store tracking data
 
 # Console Output
 
-    time tracker V0.9.7
+    time tracker V0.9.10
     
     20:10 > ls
        id  spend     upd   created  status  name
