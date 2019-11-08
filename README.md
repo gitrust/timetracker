@@ -1,6 +1,11 @@
 # timetracker
 
-A time tracker for personal usage, written in python, command-line
+A time tracker for personal usage, written in python, for command-line usage
+
+# Prerequisites
+
+-  >= python 2.7
+
 
 # How to start
 
@@ -8,34 +13,100 @@ A time tracker for personal usage, written in python, command-line
 
     python setup.py
   
-2. Copy created sqlite database `timer.db` to your HOME directory
+2. Copy created sqlite database `timer.db` to your %USERPROFILE% directory
+
+   Check %USERPROFILE% env variable exists
 
 3. Start timetracker
 
     python tracker.py
+
     type `help`
 
 
-# Store
+# Storage
 
-Uses a Sqlite database to store all task data
+Uses an Sqlite database to store all task data
 
 # List of available commands
 
 
     #<id>          reschedule an existing task using its id
-    add,a          add and start a new task
+    add,a          add a new task and set it to active
     clear,cl       clear all tasks
-    commit,ci      commit a task with specific id
+    commit,ci      commit a task by id
     done           set task to done
     export,exp     export data (current day) as JSON
     help,h         this help
-    list,l,ls      list all available tasks (ls all; ls yesterday; ls)
+    list,l,ls      list all available tasks (ls all; ls yd; ls)
     pause,p        pause tasks
     push           push all done tasks to store and remove them from current list
-    rename,ren     rename a task
-    remove,rm      remove task
-    status,st      status about current task
+    rename,ren     rename a task by id
+    remove,rm      delete task by id
+    status,st      status information
+
+# Command description
+
+## add
+
+Add a new task
+
+Alias: add, a
+
+Syntax:  add <taskname>
+
+A new task is created and set as active. Its status will become ON.
+
+## clear
+
+Remove all tasks from current list
+
+Alias: clear, c
+
+
+## commit
+
+Commits a task by id 
+
+Alias: commit, ci  
+
+Syntax: commit <task-id>
+
+Commit time from given task to storage, add a new task with the same title to current task list 
+and set new task as active.
+
+## done 
+
+Set a task to DONE 
+
+Alias: done 
+
+Syntax: done <task-id>
+
+Sets a task' status to DONE. Hide it in current list by default.
+Set pause task as active task.
+
+## list 
+
+List all current tasks 
+
+Alias: list, ls
+
+Syntax: 
+
+	ls      // list tasks from current list  
+	
+	ls all  // list alls tasks from current list, also the DONE tasks 
+	
+	ls yd   // list all tasks you created yesterday (loading them from storage)
+
+## Task status 
+
+ON - an active task 
+
+OFF - a task is paused
+
+DONE - a task is done
 
 # Console Output
 
@@ -64,6 +135,8 @@ Uses a Sqlite database to store all task data
         3  00:00   20:11     20:10  ACTIVE  Second Task
         1  00:00   20:10     20:10  ACTIVE  pause
         2  00:00   20:10     20:10  DONE    New Task
+
+
     20:11 > status
 
       active:       #3 Second Task
