@@ -4,7 +4,7 @@ A time tracker for personal usage, written in python, for command-line usage
 
 # Prerequisites
 
--  >= python 2.7
+-  python 2.7
 
 
 # How to start
@@ -49,7 +49,7 @@ Uses an Sqlite database to store all task data
 
 ## schedule a task
 
-Syntax: #<task-id>
+Syntax: #`task-id`
 
 Set a task with given task-id as active
 
@@ -59,7 +59,7 @@ Add a new task
 
 Alias: add, a
 
-Syntax:  add <taskname>
+Syntax:  add `taskname`
 
 A new task is created and set as active. Its status will become ON.
 
@@ -76,18 +76,16 @@ Commits a task by id
 
 Alias: commit, ci  
 
-Syntax: commit <task-id>
+Syntax: commit `task-id`
 
 Commit time from given task to storage, add a new task with the same taskname to current task list 
 and set new task as active.
 
 ## done 
 
-Set a task to DONE 
+Set a task to complete
 
-Alias: done <task-id>
-
-Syntax: done <task-id>
+Syntax: done `task-id`
 
 Sets a task' status to DONE. Hide it in current list by default.
 Set pause task as active task.
@@ -112,7 +110,7 @@ Pause current tasks
 
 Alias: pause, p
 
-Syntax: pause <task-id>
+Syntax: pause `task-id`
 
 Set default pause task as active task
 
@@ -122,7 +120,7 @@ Push all tasks with status DONE to storage and remove them from current list
 
 ## rename
 
-Syntax: rename <task-id> <new-taskname>
+Syntax: rename `task-id` `new-taskname`
 
 Rename a task
 
@@ -130,7 +128,7 @@ Rename a task
 
 Alias: remove, rm
 
-Syntax: remove <task-id>
+Syntax: remove `task-id`
 
 Delete a task permanently.
 
@@ -140,7 +138,7 @@ Alias: status, st
 
 Print status information
 
-## Task status 
+# Task status
 
 ON - an active task 
 
@@ -155,21 +153,27 @@ DONE - a task is done
     20:10 > ls
        id  spend     upd   created  status  name
         1  00:00   20:10     20:10  ACTIVE  pause
-    20:10 > add New Task
+
+	20:10 > add New Task
       added new task #2
-    20:10 > add Second Task
+
+	  20:10 > add Second Task
       added new task #3
+
     20:10 > ls
        id  spend     upd   created  status  name
         3  00:00   20:10     20:10  ACTIVE  Second Task
         1  00:00   20:10     20:10  ACTIVE  pause
         2  00:00   20:10     20:10  ACTIVE  New Task
+
     20:10 > done 2
       set task #2 to done
+
     20:10 > ls
        id  spend     upd   created  status  name
         3  00:00   20:10     20:10  ACTIVE  Second Task
         1  00:00   20:10     20:10  ACTIVE  pause
+
     20:10 > ls all
        id  spend     upd   created  status  name
         3  00:00   20:11     20:10  ACTIVE  Second Task
