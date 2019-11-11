@@ -47,6 +47,12 @@ Uses an Sqlite database to store all task data
 
 # Command description
 
+## schedule a task
+
+Syntax: #<task-id>
+
+Set a task with given task-id as active
+
 ## add
 
 Add a new task
@@ -72,14 +78,14 @@ Alias: commit, ci
 
 Syntax: commit <task-id>
 
-Commit time from given task to storage, add a new task with the same title to current task list 
+Commit time from given task to storage, add a new task with the same taskname to current task list 
 and set new task as active.
 
 ## done 
 
 Set a task to DONE 
 
-Alias: done 
+Alias: done <task-id>
 
 Syntax: done <task-id>
 
@@ -99,6 +105,40 @@ Syntax:
 	ls all  // list alls tasks from current list, also the DONE tasks 
 	
 	ls yd   // list all tasks you created yesterday (loading them from storage)
+
+## pause
+
+Pause current tasks
+
+Alias: pause, p
+
+Syntax: pause <task-id>
+
+Set default pause task as active task
+
+## push
+
+Push all tasks with status DONE to storage and remove them from current list
+
+## rename
+
+Syntax: rename <task-id> <new-taskname>
+
+Rename a task
+
+## remove
+
+Alias: remove, rm
+
+Syntax: remove <task-id>
+
+Delete a task permanently.
+
+## status
+
+Alias: status, st
+
+Print status information
 
 ## Task status 
 
