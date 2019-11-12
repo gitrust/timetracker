@@ -26,16 +26,20 @@ A time tracker for personal usage, written in python, for command-line usage
 
 # Storage
 
-Uses an Sqlite database to store all task data
+Uses an Sqlite database to store all task data.
+Database file `timer.db` is located in directory %USERPROFILE%.
+When you close timer applic
 
 # List of available commands
 
 
     #<id>          reschedule an existing task using its id
     add,a          add a new task and set it to active
+	adjust         adjust time of a task
     clear,cl       clear all tasks
     commit,ci      commit a task by id
     done           set task to done
+	exit           exit application
     export,exp     export data (current day) as JSON
     help,h         this help
     list,l,ls      list all available tasks (ls all; ls yd; ls)
@@ -63,12 +67,19 @@ Syntax:  add `taskname`
 
 A new task is created and set as active. Its status will become ON.
 
+## adjust
+
+Syntax: adjust `task-id` `time`
+
+Adjust time of a task. Specify a time value in seconds. The value can be negative or positive.
+
 ## clear
 
 Remove all tasks from current list
 
 Alias: clear, c
 
+Tasks in the storage are not removed with this command.
 
 ## commit
 
@@ -89,6 +100,18 @@ Syntax: done `task-id`
 
 Sets a task' status to DONE. Hide it in current list by default.
 Set pause task as active task.
+
+## exit
+
+Alias: exit, q
+
+Write schedules to storage and exit application.
+
+## help
+
+Alias: help, h
+
+Print help and usage
 
 ## list 
 

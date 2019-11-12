@@ -72,12 +72,15 @@ class Tracker:
         return status
     
     def printhelp(self,cmd):
+        print("Timetracker ", __version__)
+        print()
         print("Available commands: ")
         print(" #<id>\t\tactivate an existing task by id")
         print(" add,a\t\tadd a new task and set it to active")
         print(" adjust\t\tadjust time of a task")
         print(" commit,ci\tcommit a task by id")
         print(" done\t\tset a task to done by id")
+        print(" exit\t\texit application")
         print(" export,exp\texport current task list to json")
         print(" help,h\t\tthis help")
         print(" list,l,ls\tlist tasks, to see done tasks use, parameters [all, yesterday, yd]")
