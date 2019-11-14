@@ -7,17 +7,20 @@ A time tracker for personal usage, written in python, for command-line usage
 -  python 2.7
 
 
+# Installation
+
+1. Install python 2.7 or 3.x
+
+2. Create an Sqlite database file `timer.db`
+
+	python setup.py
+
+3. Copy file `timer.db` to your home directory (in windows %USERPROFILE%)
+	
+
 # How to start
 
-1. Setup database 
-
-    python setup.py
-  
-2. Copy created sqlite database `timer.db` to your %USERPROFILE% directory
-
-   Check %USERPROFILE% env variable exists
-
-3. Start timetracker
+Start timetracker
 
     python tracker.py
 
@@ -28,7 +31,7 @@ A time tracker for personal usage, written in python, for command-line usage
 
 Uses an Sqlite database to store all task data.
 Database file `timer.db` is located in directory %USERPROFILE%.
-When you close timer applic
+When you exit timetracker application all schedules are written to the storage.
 
 # List of available commands
 
@@ -168,6 +171,13 @@ ON - an active task
 OFF - a task is paused
 
 DONE - a task is done
+
+# Timetracker UI
+
+Under timetracker-ui you will find a web UI for timetracker storage.
+Go to time-tracker-ui folder and start the http server. UI application is available under http://localhost:8080
+
+	startserver.bat
 
 # Console Output
 
