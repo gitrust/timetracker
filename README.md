@@ -13,11 +13,11 @@ A time tracker for personal usage, written in python, for command-line usage
 
 2. Install python modules
 
-    pip install -r requirements 
+       pip install -r requirements 
 
 3. Create storage file `timer.db` (sqlite database)
 
-    python setup.py
+       python setup.py
 
 4. Copy file `timer.db` to your home directory (in windows %USERPROFILE%)
 	
