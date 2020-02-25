@@ -156,7 +156,7 @@ Alias: remove, rm
 
 Syntax: remove `task-id`
 
-Delete a task permanently.
+Delete a task permanently. If active task is deleted then pause task is set to active.
 
 ## status
 

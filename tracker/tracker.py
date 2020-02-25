@@ -3,12 +3,13 @@
 """tracker.py, main console programm to track tasks """
 
 __author__      = "gitrust"
-__version__     = "0.9.10"
+__version__     = "0.9.11"
 __status__      = "Dev"
 
 import sys
 import datetime
 import os
+import atexit
 from control import Control
 
 DBFILE = os.getenv("USERPROFILE") + "/timer.db"
@@ -47,7 +48,6 @@ class Tracker:
         elif cmd in ("remove","rm"):
             status = self.removetask(cmdlist)
         elif cmd in ("exit","quit","q"):
-            status = self.beforeexit(cmdlist)
             exit(0)
         elif cmd in ("exp","export"):
             status = self.export(cmdlist)
@@ -217,7 +217,8 @@ class Tracker:
 def main():
     tracker = Tracker()
     tracker.pause([])
-       
+    
+    atexit.register(tracker.export_to_db)
     
     while True:
         now = datetime.datetime.now().strftime('%H:%M')
