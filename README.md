@@ -11,21 +11,32 @@ A time tracker for personal usage, written in python, for command-line usage
 
 1. Install python 2.7 or 3.x
 
-2. Create an Sqlite database file `timer.db`
+2. Install python modules
 
-	python setup.py
+       pip install -r requirements 
 
-3. Copy file `timer.db` to your home directory (in windows %USERPROFILE%)
+3. Create storage file `timer.db` (sqlite database)
+
+       python setup.py
+
+4. Copy file `timer.db` to your home directory (in windows %USERPROFILE%)
 	
 
-# How to start
+# Getting started
 
 Start timetracker
 
     python tracker.py
 
-    type `help`
+## Typical workflows
 
+### Adding tasks
+
+    18:00 > add project1
+        added new task #2
+    18:30 > add project2
+        added new task #3
+    
 
 # Storage
 
@@ -38,11 +49,11 @@ When you exit timetracker application all schedules are written to the storage.
 
     #<id>          reschedule an existing task using its id
     add,a          add a new task and set it to active
-	adjust         adjust time of a task
+    adjust         adjust time of a task
     clear,cl       clear all tasks
     commit,ci      commit a task by id
     done           set task to done
-	exit           exit application
+    exit           exit application
     export,exp     export data (current day) as JSON
     help,h         this help
     list,l,ls      list all available tasks (ls all; ls yd; ls)
