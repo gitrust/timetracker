@@ -21,6 +21,9 @@ A time tracker for personal usage, written in python, for command-line usage
 
 4. Copy file `timer.db` to your home directory (in windows %USERPROFILE%)
 	
+# Screencast
+
+![](assets/screencast.gif)
 
 # Getting started
 

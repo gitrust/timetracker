@@ -5,3 +5,5 @@
 *.py    text eol=lf
 *.txt		text
 *.xml		text
+*.css   text
+
