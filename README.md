@@ -1,10 +1,10 @@
 # timetracker
 
-A time tracker for personal usage, written in python, for command-line usage
+A time tracker, written in python, for command-line usage
 
 # Prerequisites
 
--  python 2.7
+-  python 2.7 / 3.x
 
 
 # Installation
@@ -33,7 +33,7 @@ Start timetracker
 
 ## Typical workflows
 
-### Adding tasks
+### Adding new tasks
 
     18:00 > add project1
         added new task #2
