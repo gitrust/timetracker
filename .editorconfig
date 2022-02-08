@@ -19,7 +19,3 @@ indent_size = 4
 # Tab indentation (no size specified)
 [Makefile]
 indent_style = tab
-
-# Tasktree files
-[*.{tt}]
-indent_style = tab
