@@ -1,4 +1,4 @@
-*		text=auto
+*		    text=auto
 *.sh		text eol=lf
 *.bat		text eol=crlf
 *.md		text
@@ -6,4 +6,4 @@
 *.txt		text
 *.xml		text
 *.css   text
-
+*.sql   text
